@@ -6,7 +6,7 @@ cache:
     - "node_modules"
 install:
   - npm install
-before-script:
+before_script:
   - npm start
 script:
   - npm test
