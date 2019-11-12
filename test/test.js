@@ -35,24 +35,6 @@ describe('returns test message', () => {
   });
 });
 
-/**
- * test/test.js
- * Basic tests for Auth system API
- */
-describe('/POST /auth/login', () => {
-  it('should return 200 & valid token', (done) => {
-    chai.request(server)
-      .post(`${apiBase}/auth/login`)
-      .send(userCredentials)
-      .end((err, res) => {
-        if (err) return done(err);
-        expect(res.status).to.equal(200);
-        expect(res.body.data.token).to.not.equal(null);
-      });
-    done();
-  });
-});
-
 /*
   * Test for Admin create an Employee
 */
