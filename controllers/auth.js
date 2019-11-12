@@ -1,7 +1,29 @@
+/* eslint-disable max-len */
+/* eslint-disable consistent-return */
+const User = require('../models/user.js');
+
+/**
+ * Create a User
+ * @param {object} req
+ * @param {object} res
+ * @returns {object} object
+ */
 exports.signup = (req, res) => {
-  res.status(200).json({
-    message: 'Test successful!',
-  });
+  const createdAt = new Date(Date.now());
+
+  req.body.created_at = createdAt;
+
+  User.create(req.body)
+    .then((result) => res.status(201).json({
+      status: 'success',
+      data: result,
+    }))
+    .catch((err) => {
+      res.status(400).json({
+        status: 'error',
+        error: err.message,
+      });
+    });
 };
 
 exports.test = (req, res) => {
