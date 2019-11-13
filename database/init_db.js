@@ -26,8 +26,7 @@ const createUsersTable = () => {
         last_login_attempt timestamp, 
         login_attempts int,
         created_at TIMESTAMP,
-        updated_at TIMESTAMP,
-        FOREIGN KEY (role_id) REFERENCES roles (id)
+        updated_at TIMESTAMP
       )`;
 
   pool.query(queryText)
@@ -75,8 +74,7 @@ const createArticlesTable = () => {
         content text, 
         user_id int not null, 
         created_at timestamp, 
-        updated_at timestamp,
-        FOREIGN KEY (user_id) REFERENCES users (id)
+        updated_at timestamp
       )`;
 
   pool.query(queryText)
@@ -101,8 +99,7 @@ const createGifsTable = () => {
         url text, 
         cloudinary_id varchar(500), 
         created_at timestamp, 
-        updated_at timestamp,
-        FOREIGN KEY (article_id) REFERENCES articles (id)
+        updated_at timestamp
       )`;
 
   pool.query(queryText)
@@ -126,8 +123,7 @@ const createArticleCommentsTable = () => {
         article_id int not null, 
         comment text, 
         created_at timestamp, 
-        updated_at timestamp,
-        FOREIGN KEY (article_id) REFERENCES articles (id)
+        updated_at timestamp
       )`;
 
   pool.query(queryText)
