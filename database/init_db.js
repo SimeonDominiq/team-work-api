@@ -142,8 +142,7 @@ const createArticleCommentsTable = () => {
 */
 const insertInitData = () => {
   const queryText = `INSERT INTO users (
-    firstname, lastname, middlename, email, password, phone, username, avatar, date_of_birth, gender, address, is_active, role_id, last_login_attempt, login_attempts
-    values('Opeyemi', 'Adeyeye', null, 'sdprintzprof@gmail.com', '$2a$08$yI7mUE5N5P7ob59Oz8LQi.RYWbLQ.s/rOePNNz0G4cOoSw./vP.rq', '08065612206', null, null, '1993-05-27', 'Male', 'Ipaja, Lagos', 1, 1, null, null)`;
+    firstname, lastname, middlename, email, password, phone, username, avatar, date_of_birth, gender, address, is_active, role_id, last_login_attempt, login_attempts) values('Opeyemi', 'Adeyeye', null, 'sdprintzprof@gmail.com', '$2a$08$yI7mUE5N5P7ob59Oz8LQi.RYWbLQ.s/rOePNNz0G4cOoSw./vP.rq', '08065612206', null, null, '1993-05-27', 'Male', 'Ipaja, Lagos', 1, 1, null, null)`;
 
   pool.query(queryText)
     .then((res) => {
@@ -271,6 +270,7 @@ module.exports = {
   createArticlesTable,
   createGifsTable,
   createArticleCommentsTable,
+  insertInitData,
   dropAllTables,
   dropUserTable,
   dropRolesTable,
