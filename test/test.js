@@ -37,9 +37,10 @@ describe('returns test message', () => {
     chai.request(server)
       .get(`${apiBase}/auth/test`)
       .end((err, res) => {
+        console.log(res.body);
         if (err) return done(err);
         expect(res.status).to.equal(200);
-        expect(res.body.message).to.equal('Test successful!');
+        expect(res.body.status).to.equal('success');
       });
     done();
   });

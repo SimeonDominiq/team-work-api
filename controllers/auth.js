@@ -59,7 +59,17 @@ exports.login = (req, res) => {
 };
 
 exports.test = (req, res) => {
-  res.status(200).json({
-    message: 'Test successful!',
-  });
+  User.findAll()
+    .then((result) => {
+      res.status(200).json({
+        status: 'success',
+        data: result,
+      });
+    })
+    .catch((err) => {
+      res.status(400).json({
+        status: 'error',
+        error: err.message,
+      });
+    });
 };
