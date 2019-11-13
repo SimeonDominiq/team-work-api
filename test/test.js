@@ -25,10 +25,10 @@ const userCredentials = {
 const newUser = {
   firstname: 'Nana',
   lastname: 'Simeon',
-  email: 'simd@gmail.com',
+  email: 'simdo@gmail.com',
   password: 'dominicade',
-  phone: '08065612207',
-  username: 'SimD',
+  phone: '08065612208',
+  username: 'SimDD',
   date_of_birth: '27/05/1993',
 };
 
@@ -71,6 +71,7 @@ describe('Admin can create employee user account', () => {
         .send(newUser)
         .expect(201)
         .end((err, res) => {
+          console.log(res.body);
           if (err) return done(err);
           expect(res.status).to.equal(201);
           expect(res.body.data).to.not.equal(null);
