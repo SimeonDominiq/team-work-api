@@ -18,7 +18,7 @@ chai.use(chaiHttp);
 const apiBase = '/api/v1';
 
 const userCredentials = {
-  email: 'sdprintzprof@gmail.com',
+  email: 'simeondominiq@gmail.com',
   password: 'dominicade',
 };
 
