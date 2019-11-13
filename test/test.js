@@ -18,8 +18,18 @@ chai.use(chaiHttp);
 const apiBase = '/api/v1';
 
 const userCredentials = {
-  email: 'simeondominiq@gmail.com',
+  email: 'sdprintzprof@gmail.com',
   password: 'dominicade',
+};
+
+const newUser = {
+  firstname: 'Nana',
+  lastname: 'Simeon',
+  email: 'simd@gmail.com',
+  password: 'dominicade',
+  phone: '08065612207',
+  username: 'SimD',
+  date_of_birth: '27/05/1993',
 };
 
 describe('returns test message', () => {
@@ -46,7 +56,6 @@ describe('Admin can create employee user account', () => {
         .post(`${apiBase}/auth/login`)
         .send(userCredentials)
         .end((err, res) => {
-          console.log(err.message, res.body);
           if (err) return done(err);
           token = res.body.data.token;
           done();
@@ -57,12 +66,12 @@ describe('Admin can create employee user account', () => {
       request(server)
         .post(`${apiBase}/users`)
         .set('Authorization', `bearer ${token}`)
-        .send({})
+        .send(newUser)
         .expect(201)
         .end((err, res) => {
-          console.log(err);
           if (err) return done(err);
           expect(res.status).to.equal(201);
+          expect(res.body.data).to.not.equal(null);
           done();
         });
     });

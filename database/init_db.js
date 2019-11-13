@@ -1,21 +1,7 @@
 /* eslint-disable no-console */
 require('dotenv').config();
 
-const pg = require('pg');
-
-const isProduction = process.env.NODE_ENV === 'production';
-
-const connectionString = `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`;
-
-const pool = new pg.Pool({
-  connectionString: isProduction ? process.env.DATABASE_URL : connectionString,
-  ssl: isProduction,
-});
-
-pool.connect((err, client, done) => {
-  console.log('Connected to DB');
-  done();
-});
+const pool = require('../database/config.js');
 
 /**
  * Create Users Table
@@ -161,7 +147,7 @@ const createArticleCommentsTable = () => {
 const insertInitData = () => {
   const queryText = `INSERT INTO users (
     firstname, lastname, middlename, email, password, phone, username, avatar, date_of_birth, gender, address, is_active, role_id, last_login_attempt, login_attempts
-    values('Opeyemi', 'Adeyeye', null, 'simeondominiq@gmail.com', '$2a$08$yI7mUE5N5P7ob59Oz8LQi.RYWbLQ.s/rOePNNz0G4cOoSw./vP.rq', '08065612206', null, null, '1993-05-27', 'Male', 'Ipaja, Lagos', 1, 1, null, null)`;
+    values('Opeyemi', 'Adeyeye', null, 'sdprintzprof@gmail.com', '$2a$08$yI7mUE5N5P7ob59Oz8LQi.RYWbLQ.s/rOePNNz0G4cOoSw./vP.rq', '08065612206', null, null, '1993-05-27', 'Male', 'Ipaja, Lagos', 1, 1, null, null)`;
 
   pool.query(queryText)
     .then((res) => {
