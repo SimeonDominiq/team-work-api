@@ -277,7 +277,7 @@ const dropAllTables = () => {
   dropArticleCommentsTable();
 };
 
-pool.remove(() => {
+pool.on('remove', () => {
   console.log('client removed');
   process.exit(0);
 });
