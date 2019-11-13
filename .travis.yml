@@ -10,6 +10,6 @@ before_script:
   - travis_wait 30 npm install
   - psql -c 'create database teamwork;' -U postgres
   - travis_wait npm install
-  - node database/init_db.js createAllTables
+  - node database/init_db.js dropAllTables createAllTables
 script:
   - npm test

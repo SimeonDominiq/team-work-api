@@ -56,7 +56,7 @@ describe('Admin can create employee user account', () => {
         .post(`${apiBase}/auth/login`)
         .send(userCredentials)
         .end((err, res) => {
-          console.log(res);
+          console.log(res.body);
           if (err) return done(err);
           token = res.body.data.token;
           done();
