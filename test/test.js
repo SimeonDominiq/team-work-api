@@ -29,7 +29,7 @@ const newUser = {
   password: 'dominicade',
   phone: '08065612208',
   username: 'SimDD',
-  date_of_birth: '27/05/1993',
+  date_of_birth: '1993-05-27',
 };
 
 describe('returns test message', () => {
