@@ -4,7 +4,12 @@ node_js:
 cache:
   directories:
     - "node_modules"
-install:
-  - npm install
+services:
+  - postgresql
+before_script:
+  - travis_wait 30 npm install
+  - psql -c 'create database teamwork;' -U postgres
+  - travis_wait npm install
+  - node database/init_db.js createAllTables
 script:
   - npm test
