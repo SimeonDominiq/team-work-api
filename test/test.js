@@ -57,7 +57,6 @@ describe('Admin can create employee user account', () => {
         .post(`${apiBase}/auth/login`)
         .send(userCredentials)
         .end((err, res) => {
-          console.log(res.body);
           if (err) return done(err);
           token = res.body.data.token;
           done();
@@ -71,12 +70,29 @@ describe('Admin can create employee user account', () => {
         .send(newUser)
         .expect(201)
         .end((err, res) => {
-          console.log(res.body);
           if (err) return done(err);
           expect(res.status).to.equal(201);
           expect(res.body.data).to.not.equal(null);
           done();
         });
     });
+  });
+});
+
+/**
+ * test/test.js
+ * Basic tests for Admin/Employee login
+ */
+describe('/POST /auth/login', () => {
+  it('should return 200 & valid token', (done) => {
+    chai.request(server)
+      .post(`${apiBase}/auth/login`)
+      .send(userCredentials)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.status).to.equal(200);
+        expect(res.body.data.token).to.not.equal(null);
+      });
+    done();
   });
 });
