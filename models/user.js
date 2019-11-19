@@ -23,7 +23,6 @@ function findOneByEmail(email) {
   return new Promise((resolve, reject) => {
     pool.query('SELECT firstname, lastname, middlename, email, phone, role_id, last_login_attempt, login_attempts FROM users WHERE email = $1', [email])
       .then((result) => {
-        delete result.rows[0].password;
         if (result.rows[0]) {
           resolve(result.rows[0]);
         } else {
@@ -57,6 +56,22 @@ function validatePassword(password, minCharacters) {
   });
 }
 
+function checkUserExist(email, phone) {
+  return new Promise((resolve, reject) => {
+    pool.query('SELECT email, phone FROM users WHERE email = $1 OR phone = $2', [email, phone])
+      .then((result) => {
+        if (result.rows[0]) {
+          reject(new Error('Employee user (Email / Phone) account already exist'));
+        } else {
+          resolve();
+        }
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+
 function validateUserData(data) {
   return new Promise((resolve, reject) => {
     if (!data.password || !data.email) {
@@ -64,6 +79,7 @@ function validateUserData(data) {
     } else {
       validatePassword(data.password, 6)
         .then(() => validateEmail(data.email))
+        .then(() => checkUserExist(data.email, data.phone))
         .then(() => {
           resolve();
         })
@@ -144,7 +160,7 @@ module.exports = {
           if (result.rows[0].login_attempts < 10) {
             return result.rows[0];
           }
-          return reject(new Error('Too many attempts to login, try again in 15 minutes'));
+          return result.rows[0];
         })
         .then((user) => Helper.verifyPassword(data.password, user))
         .then((result) => {

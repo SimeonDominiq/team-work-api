@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+const path = require('path');
+
 const v1 = require('./routes/v1');
 
 app.use(bodyParser.json());
@@ -28,5 +30,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/v1', v1);
+
+app.use('/gifs', express.static(path.join(__dirname, 'gifs')));
 
 module.exports = app;
