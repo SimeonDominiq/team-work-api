@@ -55,7 +55,7 @@ describe('returns test message', () => {
     chai.request(server)
       .get(`${apiBase}/auth/test`)
       .end((err, res) => {
-        if (err) return done(err);
+        if (err) return err;
         expect(res.status).to.equal(200);
         expect(res.body.status).to.equal('success');
       });
@@ -74,7 +74,7 @@ describe('/Users', () => {
       .send(newUser)
       .expect(201)
       .end((err, res) => {
-        if (err) return done(err);
+        if (err) return err;
         expect(res.status).to.equal(201);
         expect(res.body.data).to.not.equal(null);
         expect(res.body.status).equal('success');
@@ -90,7 +90,7 @@ describe('/Users', () => {
       .send(newUser)
       .expect(400)
       .end((err, res) => {
-        if (err) return done(err);
+        if (err) return err;
         expect(res.status).to.equal(400);
         expect(res.body.status).equal('error');
       });
@@ -108,7 +108,7 @@ describe('/POST auth/login Admin/Employee login', () => {
       .post(`${apiBase}/auth/login`)
       .send(userCredentials)
       .end((err, res) => {
-        if (err) return done(err);
+        if (err) return err;
         expect(res.status).to.equal(200);
         expect(res.body.data.token).to.not.equal(null);
         done();
@@ -120,7 +120,7 @@ describe('/POST auth/login Admin/Employee login', () => {
       .post(`${apiBase}/auth/login`)
       .send(InvalidUserCredentials)
       .end((err, res) => {
-        if (err) return done(err);
+        if (err) return err;
         expect(res.status).to.equal(401);
         expect(res.body.status).to.equal('error');
         done();
