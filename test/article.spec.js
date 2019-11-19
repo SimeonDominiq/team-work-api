@@ -50,7 +50,6 @@ describe('/Articles', () => {
         .attach('file', `test/${fileName}`)
         .expect(201)
         .end((err, res) => {
-          if (err) return done(err);
           expect(res.status).to.equal(201);
           expect(res.body.data).to.not.equal(null);
           expect(res.body.status).equal('success');
