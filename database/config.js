@@ -12,8 +12,6 @@ const pool = new pg.Pool({
 });
 
 pool.connect((err, client, done) => {
-  console.log('Connected to DB');
-
   done();
 });
 

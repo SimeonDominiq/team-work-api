@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 module.exports = (req, res, next) => {
-  const token = req.query.token || req.headers.authorization.split(' ')[1];
+  const token = req.headers.authorization.split(' ')[1];
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
@@ -19,7 +19,7 @@ module.exports = (req, res, next) => {
       }
       User.findOne({ id: decoded.sub.id })
         .then((user) => {
-          req.decoded = decoded;
+          req.user = decoded;
           next();
         })
         .catch((err) => res.status(401).json({
