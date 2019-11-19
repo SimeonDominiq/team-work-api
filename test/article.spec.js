@@ -31,7 +31,7 @@ before((done) => {
     .send(userCredentials)
     .expect(200)
     .end((err, res) => {
-      if (err) return done(err);
+      if (err) return err;
       token = res.body.data.token;
       done();
     });
@@ -46,11 +46,10 @@ describe('/Articles', () => {
         .post(`${apiBase}/articles`)
         .set('Authorization', `bearer ${token}`)
         .field('Content-Type', 'multipart/form-data')
-        .field('title', 'New Test Title')
+        .field('title', 'Gif Post')
         .attach('file', `test/${fileName}`)
         .expect(201)
         .end((err, res) => {
-          console.log(res.body);
           if (err) return err;
           expect(res.status).to.equal(201);
           expect(res.body.data).to.not.equal(null);
